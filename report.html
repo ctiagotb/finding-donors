@@ -13274,7 +13274,7 @@ Text processing: A recent use of ID3 [292] for medical text classification can b
 <a href="http://www.cbcb.umd.edu/~salzberg/docs/murthy_thesis/survey/node32.html">http://www.cbcb.umd.edu/~salzberg/docs/murthy_thesis/survey/node32.html</a></li>
 <li>Advantages: it is easy to use and it has a certain graphic format, allowing us to interpret the data in an easier way, it is more natural than a support vector machine for example. In addition it works even with missing data on some attributes.</li>
 <li>Disadvantages: it tends to have overfitting, especially when you have many features, so you should carefully choose where to prune the tree.</li>
-<li>Why choose this model: For simplicity of implementation, the ease of explaining the concept of entropy and finally the ease of explaining to the client how the model was built.</li>
+<li>Why choose this model: For simplicity of implementation, the ease of explaining the concept of entropy and finally the ease of explaining to the client how the model was built. Once we normalized the data this could be a good candidate.</li>
 </ul>
 <p>Fonte: <a href="http://scikit-learn.org/stable/modules/tree.html">http://scikit-learn.org/stable/modules/tree.html</a></p>
 <p>Knn:</p>
@@ -13282,14 +13282,14 @@ Text processing: A recent use of ID3 [292] for medical text classification can b
 <li>Application: Face recognition Ref: <a href="https://www.quora.com/What-are-industry-applications-of-the-K-nearest-neighbor-algorithm">https://www.quora.com/What-are-industry-applications-of-the-K-nearest-neighbor-algorithm</a>, forecast economic events, text mining (catalog Texts), in agriculture to predict rainfall and other climate-related variables, in the medical field can be used to identify risk factors for prostota cancer based on clinical and demographic variables Ref: <a href="http://www.ijera.com/papers">http://www.ijera.com/papers</a> /Vol3_issue5/DI35605610.pdf.</li>
 <li>Advantages: Simplicity, intuitive, effective and competitive performance. It is not necessary to know the distribution of the data. In addition, it does not require training since the training set is used for classification.</li>
 <li>Disadvantages: Very sensitive to irrelevant data or redundant features.</li>
-<li>Why choose this model: because of the strengths presented before.</li>
+<li>Why choose this model: because of the strengths presented before. However the sample size could a issue, because knn needs a lot of data.</li>
 </ul>
 <p>SVM:</p>
 <ul>
 <li>Application: categorization of texts, image analysis and bioinformatics. Ref <a href="https://www.google.com.br/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwjh_u78mtHSAhXIQ5AKHdyeATkQFggjMAE&amp;url=http%3A%2F%2Fwww.seer.ufrgs.br%2Frita%2Farticle%2Fdownload%2Frita_v14_n2_p43-67%2F3543&amp;usg=AFQjCNEhPq2KwmQPqAadpzHNdggnASDFzw&amp;sig2=42swaEsLqbtxzlAvy8DXVQ&amp;bvm=bv.149397726,d.Y2I">https://www.google.com.br/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwjh_u78mtHSAhXIQ5AKHdyeATkQFggjMAE&amp;url=http%3A%2F%2Fwww.seer.ufrgs.br%2Frita%2Farticle%2Fdownload%2Frita_v14_n2_p43-67%2F3543&amp;usg=AFQjCNEhPq2KwmQPqAadpzHNdggnASDFzw&amp;sig2=42swaEsLqbtxzlAvy8DXVQ&amp;bvm=bv.149397726,d.Y2I</a></li>
 <li>Advantages: good generalization from training, delivery of a single solution (optimization problem is convex) compared to neural networks that deliver several. It allows the separation of data that is not linearly separable through the use of the trick kernel. Resistant to overfitting. Scalable with increasing attributes.</li>
-<li>Disadvantages: Difficulty in interpreting the result. It is not scalable with increasing number of samples. It is a binary classifier.</li>
-<li>Why choose this model: due to the good generalization from the training.</li>
+<li>Disadvantages: Difficulty in interpreting the result. It is not scalable with increasing number of samples. It is a binary classifier. So time could be a issue depending of the sample size.</li>
+<li>Why choose this model: due to the good generalization from the training. Asides it could take some time to train 102 features in more than 30k samples.</li>
 </ul>
 
 </div>
@@ -14526,14 +14526,9 @@ YII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> I found this answer from <a href="https://www.quora.com/What-is-AdaBoost">https://www.quora.com/What-is-AdaBoost</a> and it was very nice:</p>
-<p>"Consider Machine Learning University. They get 10 applicants for every available freshman slot. The application committee of 6 professionals (A,B,C,D,E,F) is in charge of deciding who to accept. They have been doing this for years and their principle concern is, "Who will succeed at MLU?"</p>
-<p>The first year, they just had everyone vote yea or nay. But after a few years, they could look at their voting records and compare it with how students actually did (for this example a binary pass or fail).</p>
-<p>Since this is MLU, they found that Administrator C had the most predictive power. Let's weight her vote higher. Unfortunately, she was only successful at predicting 60% of the time.</p>
-<p>The next most powerful predictor was administrator D, but D's answers were very correlated with C. It was as if they were considering the same criteria, but C was just better at it. So let's put D aside for now.</p>
-<p>D is better than F, but F appears to be looking at some different criteria than C or D (perhaps focusing on extra curricular activities instead of academics). F's predictive power is less than C or D, but combined with C, F adds more information than D would. That is, C and F is a better classifier than C and D even though D is better than F. Did you get that?</p>
-<p>And so it goes. We even find that B's prediction is negatively correlated with student success. But that's fine. We won't fire her. At MLU anything different than random is valued. We'll just put a negative coefficient in front of her guess. We did, however, decide that D wasn't adding anything new and let him go back to research.</p>
-<p>So now, instead of summing the votes equally A + B + C + D + E + F and picking the top, we weight these weak classifiers to make a much stronger one."</p>
+<p><strong>Answer: </strong> My answer is based in this quora answer: <a href="https://www.quora.com/What-is-AdaBoost">https://www.quora.com/What-is-AdaBoost</a></p>
+<p>Adaboost is a type boosting ensemble learner. It combines multiple learners to build a better predict model.</p>
+<p>We assign equal weights to all the training examples and choose a base algorithm (for example decision trees). At each step of iteration, we apply the base algorithm to the training set and increase the weights of the incorrectly classified examples. We iterate n times, each time applying base learner on the training set with updated weights. The final model is the weighted sum of the n learners.</p>
 
 </div>
 </div>
